@@ -58,12 +58,13 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ Mod4Mask,              		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -83,19 +84,24 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY,                       XK_o, 	   focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY|ShiftMask,             XK_o,      tagmon,         {.i = +1 } },
+	TAGKEYS(                        XK_plus,                             0)
+	TAGKEYS(                        XK_bracketleft,                      1)
+	TAGKEYS(                        XK_braceleft,                        2)
+	TAGKEYS(                        XK_parenleft,                        3)
+	TAGKEYS(                        XK_ampersand,                        4)
+	TAGKEYS(                        XK_equal,                            5)
+	TAGKEYS(                        XK_parenright,                       6)
+	TAGKEYS(                        XK_braceright,                       7)
+	TAGKEYS(                        XK_bracketright,                     8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
+// real prog dvorak
+// XK_plus, XK_bracketleft, XK_braceleft, XK_parenleft, XK_ampersand, XK_equal, XK_parenright, XK_braceright, XK_bracketright
+// XK_1, xK_2, XK_3, xK_4, XK_5, XK_6, XK_7, XK_8, XK_9,
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
